@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.time.LocalTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,6 +11,8 @@ class RestaurantTest {
     LocalTime openingTime = LocalTime.parse("10:30:00");
     LocalTime closingTime = LocalTime.parse("22:00:00");
     Restaurant restaurant = new Restaurant("Amelie's cafe","Chennai",openingTime,closingTime);
+
+
     @Test
     public void is_restaurant_open_should_return_true_if_time_is_between_opening_and_closing_time() {
         LocalTime mockCurrentTime = LocalTime.parse("18:30:00");
@@ -57,4 +60,12 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @Test
+    public void get_menu_amount_should_return_sum_of_price_of_each_item_in_the_menu() {
+        restaurant.addToMenu("Sweet corn soup",119);
+        restaurant.addToMenu("Vegetable lasagne", 269);
+        List<Item>items=restaurant.getMenu();
+        assertEquals(388,restaurant.getMenuAmount(items));
+    }
+
 }
