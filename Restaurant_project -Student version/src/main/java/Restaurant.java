@@ -67,6 +67,13 @@ public class Restaurant {
         return name;
     }
 
-
+    public int getMenuAmount(List<Item> items) {
+        int total = 0;
+        for (int i = 0; i < items.size(); i++) {
+            Item currentItem = items.get(i);
+            total = total+currentItem.getPrice();
+        }
+        return total;
+    }
 
 }
